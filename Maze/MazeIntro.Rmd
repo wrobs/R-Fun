@@ -1,0 +1,96 @@
+---
+title: "Solving the Maze"
+
+output: html_document
+---
+
+This is a challenge from [Anarchy Golf](http://golf.shinh.org/p.rb?maze+solving) where the input is an ASCII maze drawn with hashes,  
+```{r eval=F}
+############################# ###########
+#   #   #       #     #     #     #     #
+# # # ### ##### ### ### ### ##### # #####
+# # # #   #   #       # #   #     #     #
+# # # # ### # ####### # ##### ### ### # #
+# # #   #   #   # #   # #     # # #   # #
+### # ### # ### # # ### # ##### # ##### #
+#   #     #   #   # #   # #   # # #   # #
+# ########### ##### ### # ### # # # # # #
+#   #       #     # #   # #     # # # # #
+# # ##### ####### # # ### # ##### # # # #
+  #       #   # # #     #       #   # # #
+# ########### # # ##### ####### ####### #
+# #   #       #   #   #   #   #     #   #
+# # # ### ####### # ##### # ##### # # ###
+# # #   #     #         #       # # #   #
+# ##### ### ### ####### ####### # ##### #
+# #       #   #     #   #     # #   # # #
+# # ##### ### ##### # ### ### # # # # # #
+#       #           #     #   #   #     #
+#########################################
+```
+
+
+and the output is the the solution to the maze, with the solution spaces filled with periods.  
+
+```{r eval=F}
+#############################.###########
+#   #   #.......#     #     #.....#     #
+# # # ###.#####.### ### ### #####.# #####
+# # # #...#   #.......# #   #.....#     #
+# # # #.### # #######.# #####.### ### # #
+# # #...#...#   # #...# #.....# # #   # #
+### #.###.#.### # #.### #.##### # ##### #
+#   #.....#...#   #.#   #.#   # # #   # #
+# ###########.#####.### #.### # # # # # #
+#   #       #.....#.#   #.#     # # # # #
+# # ##### #######.#.# ###.# ##### # # # #
+..#       #   # #.#.....#.......#   # # #
+#.########### # #.#####.#######.####### #
+#.#   #       #  .#   #...#   #...  #   #
+#.# # ### #######.# #####.# #####.# # ###
+#.# #   #     #...      #.......#.# #   #
+#.##### ### ###.####### #######.#.##### #
+#.#.......#   #.....#   #     #.#.  # # #
+#.#.#####.### #####.# ### ### #.#.# # # #
+#...    #...........#     #   #...#     #
+#########################################
+```
+
+
+Although the ultimate goal is to accomplish this with the shortest script possible,
+it's an opportunity to look at a few different methods to tackle the problem. After all, one method 
+will to be more easily shortened than the others. Here are three possible strategies.  
+  
+  
+1. Select by Filling
+    + Begin at first edge space.
+    + Make "fill" function or something along those lines, which operates 
+    like an image editor's bucket tool.
+    + For all spaces where you have one way you can go, make 
+    that choice.
+    + For all spaces where you have 2 or more options, 
+    close off all options but one, "fill" it, and if the 
+    other edge space (victory) is filled as a result, 
+    make that choice.
+    + Rinse and repeat until you reach other edge space.
+2. Use "Robot" with Memory
+    + Record each time the robot moves.
+    + For spaces where the robot has more than one place to go, 
+    it chooses one and remembers which one it chose.
+    + If it hits a dead end, it goes back to the last place 
+    it made a choice, and makes another one.
+    + If it has made all choices at a place, it backtracks to 
+    the one before that etc.
+3. Record All Paths
+    + Use fill function again.
+    + This time, each iteration of the fill procedure adds to a recorded path.
+    + when there is more than one available space and the fill function splits, 
+    create a new record for each option.
+    + When the fill is finished, one of the recorded paths will go from one end space to the other.
+    + Select that path as the solution.  
+  
+  
+  
+  
+  
+  This project will investigate each, and find the one best suited to be shortened and submitted.   
